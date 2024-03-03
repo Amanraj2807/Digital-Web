@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="abc.css" />
+        <title>Digital Web | Login & Registration</title>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <nav class="nav">
+                <div class="nav-logo">
+                    <a href="#" class="logo">
+                        
+                            
+                            
+                    </a>
+                </div>
+                <div class="nav-menu" id="navMenu"></div>
+                <div class="nav-button">
+                    <button
+                        class="btn white-btn"
+                        id="loginBtn"
+                        onclick="login()"
+                    >
+                        Sign In
+                    </button>
+                    <button class="btn" id="registerBtn" onclick="register()">
+                        Sign Up
+                    </button>
+                </div>
+                <div class="nav-menu-btn">
+                    <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+                </div>
+            </nav>
+            <!----------------------------- Form box ----------------------------------->
+            <div class="form-box">
+                <!------------------- login form -------------------------->
+                <div class="login-container" id="login">
+                    <div class="top">
+                        <span
+                            >Don't have an account?
+                            <a href="#" onclick="register()">Sign Up</a></span
+                        >
+                        <header>Login</header>
+                    </div>
+                    <form id="login-form">
+                        <div class="input-box">
+                            <input
+                                type="text"
+                                class="input-field"
+                                placeholder="Username or Email"
+                                name="email"
+                            />
+                            <i class="bx bx-user"></i>
+                        </div>
+                        <div class="input-box">
+                            <input
+                                type="password"
+                                class="input-field"
+                                placeholder="Password"
+                                name="password"
+                            />
+                            <i class="bx bx-lock-alt"></i>
+                        </div>
+                        <div class="input-box">
+                            <input
+                                type="submit"
+                                class="submit"
+                                value="Sign In"
+                            />
+                        </div>
+                        <div class="two-col">
+                            <div class="one">
+                                <input type="checkbox" id="login-check" />
+                                <label for="login-check"> Remember Me</label>
+                            </div>
+                            <div class="two">
+                                <label><a href="#">Forgot password?</a></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!------------------- registration form -------------------------->
+                <div class="register-container" id="register">
+                    <div class="top">
+                        <span
+                            >Have an account?
+                            <a href="#" onclick="login()">Login</a></span
+                        >
+                        <header>Sign Up</header>
+                    </div>
+                    <form id="signup-form">
+                        <div class="two-forms">
+                            <div class="input-box">
+                                <input
+                                    type="text"
+                                    class="input-field"
+                                    placeholder="Firstname"
+                                    name="firstname"
+                                />
+                                <i class="bx bx-user"></i>
+                            </div>
+                            <div class="input-box">
+                                <input
+                                    type="text"
+                                    class="input-field"
+                                    placeholder="Lastname"
+                                    name="lastname"
+                                />
+                                <i class="bx bx-user"></i>
+                            </div>
+                        </div>
+                        <div class="input-box">
+                            <input
+                                type="text"
+                                class="input-field"
+                                placeholder="Email"
+                                name="email"
+                            />
+                            <i class="bx bx-envelope"></i>
+                        </div>
+                        <div class="input-box">
+                            <input
+                                type="password"
+                                class="input-field"
+                                placeholder="Password"
+                                name="password"
+                            />
+                            <i class="bx bx-lock-alt"></i>
+                        </div>
+                        <div class="input-box">
+                            <input
+                                type="submit"
+                                class="submit"
+                                value="Register"
+                            />
+                        </div>
+                        <div class="two-col">
+                            <div class="one">
+                                <input type="checkbox" id="register-check" />
+                                <label for="register-check"> Remember Me</label>
+                            </div>
+                            <div class="two">
+                                <label
+                                    ><a href="#">Terms & conditions</a></label
+                                >
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script>
+            function myMenuFunction() {
+                var i = document.getElementById("navMenu");
+                if (i.className === "nav-menu") {
+                    i.className += " responsive";
+                } else {
+                    i.className = "nav-menu";
+                }
+            }
+        </script>
+        <script>
+            var a = document.getElementById("loginBtn");
+            var b = document.getElementById("registerBtn");
+            var x = document.getElementById("login");
+            var y = document.getElementById("register");
+
+            function login() {
+                x.style.left = "4px";
+                y.style.right = "-520px";
+                a.className += " white-btn";
+                b.className = "btn";
+                x.style.opacity = 1;
+                y.style.opacity = 0;
+            }
+
+            function register() {
+                x.style.left = "-510px";
+                y.style.right = "5px";
+                a.className = "btn";
+                b.className += " white-btn";
+                x.style.opacity = 0;
+                y.style.opacity = 1;
+            }
+        </script>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import {
+                getAuth,
+                createUserWithEmailAndPassword,
+                signInWithEmailAndPassword,
+                updateProfile,
+                onAuthStateChanged,
+                signOut,
+            } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyBzehCYaU2qNInKSfXpT4Qqq5oJeoRL8xc",
+                authDomain: "digital-web-anshul.firebaseapp.com",
+                projectId: "digital-web-anshul",
+                storageBucket: "digital-web-anshul.appspot.com",
+                messagingSenderId: "951634384760",
+                appId: "1:951634384760:web:4045e2546a988244b7da8d",
+            };
+
+            // Initialize Firebase
+            const firebaseApp = initializeApp(firebaseConfig);
+
+            // Get the Auth instance
+            const auth = getAuth(firebaseApp);
+
+            // signup
+            function validateForm(
+                type = "signup",
+                email = "",
+                password = "",
+                firstname = "",
+                lastname = ""
+            ) {
+                // Basic email check (You can use a more robust regex)
+                const emailPattern = /^[^@]+@\w+(\.\w+)+\w$/;
+                if (type === "signup") {
+                    if (!firstname) {
+                        alert("Please enter first name.");
+                        return false;
+                    }
+                    if (!lastname) {
+                        alert("Please enter last name.");
+                        return false;
+                    }
+                }
+                if (!emailPattern.test(email)) {
+                    alert("Please enter a valid email address.");
+                    return false;
+                }
+                // Basic password length check
+                if (password.length < 8) {
+                    alert("Password must be at least 8 characters long.");
+                    return false;
+                }
+
+                return true;
+            }
+
+            const signupForm = document.getElementById("signup-form");
+            signupForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                var signupFormData = new FormData(signupForm);
+                const email = signupFormData.get("email")?.trim() || "";
+                const password = signupFormData.get("password")?.trim() || "";
+                const firstname = signupFormData.get("firstname")?.trim() || "";
+                const lastname = signupFormData.get("lastname")?.trim() || "";
+                console.log("email", email, password);
+
+                if (
+                    validateForm("signup", email, password, firstname, lastname)
+                ) {
+                    createUserWithEmailAndPassword(auth, email, password)
+                        .then((userCredential) => {
+                            // Signup successful, maybe redirect to profile page, etc.
+                            var user = userCredential.user;
+                            // const user = auth.currentUser;
+
+                            // Update user's profile with first and last name
+                            updateProfile(user, {
+                                displayName: firstname + " " + lastname,
+                            })
+                                .then(() => {
+                                    console.log(
+                                        "User profile updated with name"
+                                    );
+                                    window.location.href = "course2.html";
+                                })
+                                .catch((error) => {
+                                    // Handle errors updating profile
+                                    console.error(error);
+                                });
+                            console.log("Logged in as", user);
+                            alert("Signup successfully");
+                        })
+                        .catch((error) => {
+                            // Handle signup errors
+                            console.error("Signup failed:", error);
+                            alert("Signup failed");
+                        });
+                }
+            });
+
+            // login
+
+            const loginForm = document.getElementById("login-form");
+            loginForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                var loginFormData = new FormData(loginForm);
+                const email = loginFormData.get("email")?.trim() || "";
+                const password = loginFormData.get("password")?.trim() || "";
+                if (validateForm("login", email, password)) {
+                    signInWithEmailAndPassword(auth, email, password)
+                        .then((userCredential) => {
+                            // Login successful, maybe redirect to profile page, etc.
+                            var user = userCredential.user;
+                            console.log("User logged in", user);
+                            alert("Login successfully");
+                            window.location.href = "course2.html";
+                        })
+                        .catch((error) => {
+                            // Handle signup errors
+                            console.error("Login failed:", error);
+                            alert("Login failed");
+                        });
+                }
+            });
+            // Check if the user is logged in or not
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in
+                    console.log("User is logged in with", user);
+                    window.location.href = "course2.html";
+                } else {
+                    // User is signed out
+                    console.log("User is logged out");
+                }
+            });
+
+            // Assuming you have a logout button
+            const logoutButton = document.getElementById("logout-button");
+            if (logoutButton) {
+                logoutButton.addEventListener("click", () => {
+                    signOut(auth)
+                        .then(() => {
+                            // Sign-out successful.
+                            console.log("User logged out");
+                            window.location.href = "course2.html";
+                        })
+                        .catch((error) => {
+                            // An error occurred
+                            console.error(error);
+                        });
+                });
+            }
+        </script>
+        <script></script>
+    </body>
+</html>
